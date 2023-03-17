@@ -1,3 +1,5 @@
 ^rasterclassifier\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+
+example_tests.R
