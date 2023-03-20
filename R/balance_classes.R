@@ -1,6 +1,7 @@
 
 # Smallest number of rows in df per class column value
-count_smallest_class <- function(training_df, class_column) {
+count_smallest_class <- function(training_df,
+                                 class_column) {
   min(table(training_df[[class_column]]))
 }
 
@@ -9,11 +10,13 @@ count_smallest_class <- function(training_df, class_column) {
 #'
 #' @param training_df Data frame to be balanced using class column.
 #' @param class_column Name of the column to balance the classes.
-#' @param sample_per_class Optional. Number of samples per class. Defaults to
+#' @param samples_per_class Optional. Number of samples per class. Defaults to
 #' NULL and if NULL the samples_per_class will be the size of the smallest
 #' class. If specify a samples_per_class > the smallest class size then
-#' sample_per_class size will revert to smallest class size -
+#' samples_per_class size will revert to smallest class size -
 #' sample with replacement is never used.
+#' @param seed_val Optional. Set seed_val to the same integer value
+#' each time if want identical results returned.
 #'
 #' @return A data.frame with a subset of rows of input df after sampling.
 #' @export
@@ -34,23 +37,28 @@ count_smallest_class <- function(training_df, class_column) {
 #'
 #' df <- balance_classes(df, "ml_class")
 #'
-#' # Show now balanced and as sample_per_class not specified each class has
+#' # Show now balanced and as samples_per_class not specified each class has
 #' # smallest initial class size number of samples (5)
 #'
 #' table(df$ml_class)
 #'
 balance_classes <- function(training_df,
                             class_column,
-                            sample_per_class = NULL) {
+                            samples_per_class = NULL,
+                            seed_val = NULL) {
   smallest_count <- count_smallest_class(training_df, class_column)
 
-  if (is.null(sample_per_class)) {
-    sample_per_class <- smallest_count
-  } else if (sample_per_class > smallest_count) {
-    sample_per_class <- smallest_count
+  if (is.null(samples_per_class)) {
+    samples_per_class <- smallest_count
+  } else if (samples_per_class > smallest_count) {
+    samples_per_class <- smallest_count
   }
 
-  training_df |>
-    dplyr::group_by(.data[[class_column]]) |>
-    dplyr::slice_sample(n = sample_per_class)
+  if (!is.null(seed_val)) {
+    set.seed(seed_val)
+  }
+
+  training_df %>%
+    dplyr::group_by(.data[[class_column]]) %>%
+    dplyr::slice_sample(n = samples_per_class)
 }
