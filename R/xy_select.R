@@ -27,7 +27,7 @@ xy_select <- function(training_df, class_column, y_as_factor) {
 #' @export
 #'
 #' @examples
-xy_selection <- function(train_test_list, class_column, y_as_factor = TRUE) {
+xy_select <- function(train_test_list, class_column, y_as_factor = TRUE) {
   purrr::map(train_test_list,
     xy_select,
     class_column = class_column,
