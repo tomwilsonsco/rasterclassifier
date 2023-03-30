@@ -1,4 +1,4 @@
-xy_select <- function(training_df, class_column, y_as_factor) {
+xy_col_selection <- function(training_df, class_column, y_as_factor) {
   x <- training_df %>% dplyr::select(-dplyr::all_of(c(class_column)))
 
   y <- training_df %>%
@@ -29,7 +29,7 @@ xy_select <- function(training_df, class_column, y_as_factor) {
 #' @examples
 xy_select <- function(train_test_list, class_column, y_as_factor = TRUE) {
   purrr::map(train_test_list,
-    xy_select,
+    xy_col_selection,
     class_column = class_column,
     y_as_factor = y_as_factor
   )
