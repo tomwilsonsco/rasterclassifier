@@ -25,17 +25,21 @@ Extract pixels from input raster using input training data.
 \examples{
 # create raster
 rast <- terra::rast(
-ncols = 10, nrows = 10, xmin = 0, xmax = 10, ymin = 0,
-ymax = 10, crs = "EPSG:4326", vals=runif(100, 0, 1),
-names=c("b1")
+  ncols = 10, nrows = 10, xmin = 0, xmax = 10, ymin = 0,
+  ymax = 10, crs = "EPSG:4326", vals = runif(100, 0, 1),
+  names = c("b1")
 )
 
 # create polygon vector layer
-p <- list(sf::st_polygon(list(cbind(c(0,1,1,0,0), c(0,0,1,1,0)))),
-          sf::st_polygon(list(cbind(c(8, 9, 9, 8, 8), c(8, 8, 9, 9, 8)))))
+p <- list(
+  sf::st_polygon(list(cbind(c(0, 1, 1, 0, 0), c(0, 0, 1, 1, 0)))),
+  sf::st_polygon(list(cbind(c(8, 9, 9, 8, 8), c(8, 8, 9, 9, 8))))
+)
 
-vect <- sf::st_as_sf(data.frame(id=c(1,2),
-geom=sf::st_sfc(p, crs="EPSG:4326")))
+vect <- sf::st_as_sf(data.frame(
+  id = c(1, 2),
+  geom = sf::st_sfc(p, crs = "EPSG:4326")
+))
 
 # extract raster pixels where intersect vector later
 extract_pixels(rast, vect)

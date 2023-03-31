@@ -2,7 +2,8 @@ Package: rasterclassifier
 Title: Simple classification of raster data using vector training data.
 Version: 0.0.0.9000
 Authors@R: 
-    person("Thomas", "Wilson", , "thomaswilson81@gmail.com", role = c("aut"))
+    person("Thomas", "Wilson", , "thomaswilson81@gmail.com", 
+    role = c("cre"))
 Description: Simple classification of raster data using vector training data.
 License: MIT + file LICENSE
 Encoding: UTF-8
