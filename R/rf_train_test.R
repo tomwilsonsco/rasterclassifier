@@ -4,14 +4,13 @@ get_metrics <- function(rf) {
     precision = MLmetrics::Precision,
     recall = MLmetrics::Recall
   )
-  purrr::map_df(metrics, function(f) {
+  purrr::map_df(metrics, \(f) {
     f(rf$predicted, rf$y)
   })
 }
 
 
-run_train_test <- function(.x,
-                           training_df,
+run_train_test <- function(training_df,
                            class_column,
                            n_tree) {
   tt_xy <- training_df %>%
@@ -35,9 +34,8 @@ rf_train_test <- function(training_df,
                           n_tests = 5,
                           class_column = "ml_class",
                           n_tree = 100) {
-  purrr::map_df(1:n_tests,
-  run_train_test,
-  training_df = training_df,
-  class_column = class_column,
-  n_tree = n_tree)
+
+  purrr::map_df(1:5, \(x) run_train_test(training_df = training_df,
+                                         class_column = class_column,
+                                         n_tree = n_tree))
 }
