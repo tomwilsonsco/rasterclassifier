@@ -27,8 +27,11 @@ xy_col_selection <- function(training_df, class_column, y_as_factor) {
 #' @export
 #'
 #' @examples
+#' iris %>%
+#'   train_test_split() %>%
+#'   xy_select(class_column = "Species")
 xy_select <- function(train_test_list,
-                      class_column="ml_class",
+                      class_column = "ml_class",
                       y_as_factor = TRUE) {
   purrr::map(train_test_list,
     xy_col_selection,

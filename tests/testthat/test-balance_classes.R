@@ -1,5 +1,5 @@
 test_that("default sample works", {
-  test_balance_default <-  readRDS(test_path(
+  test_balance_default <- readRDS(test_path(
     "testdata",
     "test_balance_default.rds"
   ))
@@ -13,13 +13,15 @@ test_that("default sample works", {
     ),
     b1 = stats::runif(35, 0, 1)
   )
-  expect_equal(balance_classes(df, "ml_class", seed_val=123),
-               test_balance_default)
+  expect_equal(
+    balance_classes(df, "ml_class", seed_val = 123),
+    test_balance_default
+  )
 })
 
 
 test_that("specified sample size works", {
-  test_balance_specified <-  readRDS(test_path(
+  test_balance_specified <- readRDS(test_path(
     "testdata",
     "test_balance_specified.rds"
   ))
@@ -33,15 +35,18 @@ test_that("specified sample size works", {
     ),
     b1 = stats::runif(35, 0, 1)
   )
-  expect_equal(balance_classes(df,
-                               "ml_class",
-                               samples_per_class=4,
-                               seed_val=123),
-               test_balance_specified)
+  expect_equal(
+    balance_classes(df,
+      "ml_class",
+      samples_per_class = 4,
+      seed_val = 123
+    ),
+    test_balance_specified
+  )
 })
 
 test_that("unchanged by sampling works", {
-  test_balance_unchanged <-  readRDS(test_path(
+  test_balance_unchanged <- readRDS(test_path(
     "testdata",
     "test_balance_unchanged.rds"
   ))
@@ -55,8 +60,11 @@ test_that("unchanged by sampling works", {
     ),
     b1 = stats::runif(12, 0, 1)
   )
-  expect_equal(balance_classes(df,
-                               "ml_class",
-                               seed_val=123),
-               test_balance_unchanged)
+  expect_equal(
+    balance_classes(df,
+      "ml_class",
+      seed_val = 123
+    ),
+    test_balance_unchanged
+  )
 })

@@ -4,7 +4,7 @@
 \alias{xy_select}
 \title{Divide train and test dataframes to x columns and y column.}
 \usage{
-xy_select(train_test_list, class_column, y_as_factor = TRUE)
+xy_select(train_test_list, class_column = "ml_class", y_as_factor = TRUE)
 }
 \arguments{
 \item{train_test_list}{List of dataframes.}
@@ -20,4 +20,9 @@ A list of  a list of x and y dataframes, for both train and test.
 }
 \description{
 The list of train and test dataframes is split into sub lists of x and y.
+}
+\examples{
+iris \%>\%
+  train_test_split() \%>\%
+  xy_select(class_column = "Species")
 }
