@@ -1,29 +1,31 @@
-run_train_test <- function(training_df,
+split_and_fit <- function(training_df,
+                           classifier,
                            class_column,
                            n_tree) {
   tt_xy <- training_df %>%
     train_test_split() %>%
     xy_select(class_column)
 
-  rf <- randomForest::randomForest(
-    x = tt_xy$train$x,
-    y = tt_xy$train$y,
-    testx = tt_xy$test$x,
-    testy = tt_xy$test$y,
-    ntree = n_tree
-  )
+  if (classifier=="random_forest"){
+    model <- fit_random_forest(tt_xy)
+    pred_y <- stats::predict(model, tt_xy$test$x)
+  }
 
-  get_ml_metrics(rf$predicted, rf$y)
+  # Add other classifiers here in time....
+
+  get_ml_metrics(pred_y, tt_xy$test$y)
 }
 
 
 
-rf_train_test <- function(training_df,
+classif_train_test <- function(training_df,
                           n_tests = 5,
+                          classifier = "random_forest",
                           class_column = "ml_class",
                           n_tree = 100) {
 
-  metrics <- purrr::map(1:5, \(x) run_train_test(training_df = training_df,
+  metrics <- purrr::map(1:n_tests, \(x) split_and_fit(training_df = training_df,
+                                         classifier = classifier,
                                          class_column = class_column,
                                          n_tree = n_tree))
 
