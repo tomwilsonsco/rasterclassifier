@@ -1,4 +1,4 @@
-split_and_fit <- function(training_df,
+.split_and_fit <- function(training_df,
                           classifier,
                           class_column,
                           training_proportion,
@@ -17,6 +17,26 @@ split_and_fit <- function(training_df,
   get_ml_metrics(pred_y, tt_xy$test$y)
 }
 
+.print_metrics <- function(metrics){
+  message("Confusion matrices for n_tests:")
+  purrr::imap(metrics, \(x, y){cat("\n")
+    cat("Test", y)
+    print(x$confusion_matrix)})
+
+  cat("\n")
+
+  message("Precision, recall, F1, overall per test")
+  metrics_df <- purrr::map_df(metrics, \(x) x[c(
+    "precision",
+    "recall", "f1_score", "overall"
+  )])
+  print(metrics_df)
+
+  cat("\n")
+
+  message("Mean precision, recall, F1, overall")
+  print(colMeans(metrics_df))
+}
 
 
 #' Classifier testing n times against different train test splits.
@@ -31,6 +51,9 @@ split_and_fit <- function(training_df,
 #' and only option is random_forest.
 #' @param class_column Name of the column in training_df containing class
 #' labels.
+#' @param training_proportion Proportion of `training_df` rows used for
+#' training compared to testing. Defaults to 0.75.
+#' @param silent Whether to print metrics for each test. Defaults to TRUE.
 #' @param ... Other arguments to be passed to classifier algorithm. For example
 #' if random_forest can specify ntree for the number of decision trees used.
 #'
@@ -43,9 +66,10 @@ classif_train_test <- function(training_df,
                                n_tests = 5,
                                classifier = "random_forest",
                                class_column = "ml_class",
-                               training_proportion,
+                               training_proportion = 0.75,
+                               silent = FALSE,
                                ...) {
-  metrics <- purrr::map(1:n_tests, \(x) split_and_fit(
+  metrics <- purrr::map(1:n_tests, \(x) .split_and_fit(
     training_df = training_df,
     classifier = classifier,
     class_column = class_column,
@@ -53,17 +77,9 @@ classif_train_test <- function(training_df,
     ...
   ))
 
-
-  metrics_df <- purrr::map_df(metrics, \(x) x[c(
-    "precision",
-    "recall", "f1_score", "overall"
-  )])
-
-  message("Precision, recall, F1, overall per test")
-  print(metrics_df)
-
-  message("Mean precision, recall, F1, overall")
-  print(colMeans(metrics_df))
+  if (! silent){
+    .print_metrics(metrics)
+  }
 
   invisible(metrics)
 }
