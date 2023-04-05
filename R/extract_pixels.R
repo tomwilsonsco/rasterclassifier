@@ -1,8 +1,8 @@
 
-extract_per_class <- function(class_value,
-                              input_raster,
-                              training_shapes,
-                              training_class_col) {
+.extract_per_class <- function(class_value,
+                               input_raster,
+                               training_shapes,
+                               training_class_col) {
   class_training <- training_shapes[training_shapes[[training_class_col]]
   == class_value, ]
 
@@ -12,7 +12,7 @@ extract_per_class <- function(class_value,
   pixel_vals
 }
 
-check_class_col <- function(training_shapes, class_column) {
+.check_class_col <- function(training_shapes, class_column) {
   if (!class_column %in% colnames(training_shapes)) {
     training_shapes[[class_column]] <- 0
   }
@@ -20,7 +20,7 @@ check_class_col <- function(training_shapes, class_column) {
 }
 
 
-get_distinct_classes <- function(training_shapes, training_class_col) {
+.get_distinct_classes <- function(training_shapes, training_class_col) {
   distinct_vals <- unique(training_shapes[[training_class_col]])
 
   if (is.factor(distinct_vals)) {
@@ -67,20 +67,22 @@ get_distinct_classes <- function(training_shapes, training_class_col) {
 extract_pixels <- function(input_raster,
                            training_shapes,
                            training_class_col = "ml_class") {
-  is_raster(input_raster)
+  .is_raster(input_raster)
 
-  is_vector(training_shapes)
+  .is_vector(training_shapes)
 
   check_epsg(input_raster, training_shapes)
 
-  training_shapes <- check_class_col(training_shapes, training_class_col)
+  training_shapes <- .check_class_col(training_shapes, training_class_col)
 
-  distinct_classes <- get_distinct_classes(training_shapes, training_class_col)
+  distinct_classes <- .get_distinct_classes(training_shapes, training_class_col)
 
-  purrr::map_df(distinct_classes,
-    extract_per_class,
-    input_raster = input_raster,
-    training_shapes = training_shapes,
-    training_class_col = training_class_col
+  purrr::map_df(
+    distinct_classes,
+    \(x)  .extract_per_class(x,
+      input_raster = input_raster,
+      training_shapes = training_shapes,
+      training_class_col = training_class_col
+    )
   )
 }

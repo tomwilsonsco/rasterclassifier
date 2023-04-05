@@ -1,7 +1,7 @@
 
 # Smallest number of rows in df per class column value
-count_smallest_class <- function(training_df,
-                                 class_column) {
+.count_smallest_class <- function(training_df,
+                                  class_column) {
   min(table(training_df[[class_column]]))
 }
 
@@ -46,7 +46,7 @@ balance_classes <- function(training_df,
                             class_column,
                             samples_per_class = NULL,
                             seed_val = NULL) {
-  smallest_count <- count_smallest_class(training_df, class_column)
+  smallest_count <- .count_smallest_class(training_df, class_column)
 
   if (is.null(samples_per_class)) {
     samples_per_class <- smallest_count

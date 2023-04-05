@@ -1,4 +1,4 @@
-xy_col_selection <- function(training_df, class_column, y_as_factor) {
+.xy_col_selection <- function(training_df, class_column, y_as_factor) {
   x <- training_df %>% dplyr::select(-dplyr::all_of(c(class_column)))
 
   y <- training_df %>%
@@ -33,9 +33,11 @@ xy_col_selection <- function(training_df, class_column, y_as_factor) {
 xy_select <- function(train_test_list,
                       class_column = "ml_class",
                       y_as_factor = TRUE) {
-  purrr::map(train_test_list,
-    xy_col_selection,
-    class_column = class_column,
-    y_as_factor = y_as_factor
+  purrr::map(
+    train_test_list,
+    \(x) .xy_col_selection(x,
+      class_column = class_column,
+      y_as_factor = y_as_factor
+    )
   )
 }

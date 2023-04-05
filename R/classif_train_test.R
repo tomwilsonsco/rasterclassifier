@@ -1,8 +1,8 @@
 .split_and_fit <- function(training_df,
-                          classifier,
-                          class_column,
-                          training_proportion,
-                          ...) {
+                           classifier,
+                           class_column,
+                           training_proportion,
+                           ...) {
   tt_xy <- training_df %>%
     train_test_split(training_proportion = training_proportion) %>%
     xy_select(class_column)
@@ -17,11 +17,13 @@
   get_ml_metrics(pred_y, tt_xy$test$y)
 }
 
-.print_metrics <- function(metrics){
+.print_metrics <- function(metrics) {
   message("Confusion matrices for n_tests:")
-  purrr::imap(metrics, \(x, y){cat("\n")
+  purrr::imap(metrics, \(x, y){
+    cat("\n")
     cat("Test", y)
-    print(x$confusion_matrix)})
+    print(x$confusion_matrix)
+  })
 
   cat("\n")
 
@@ -77,7 +79,7 @@ classif_train_test <- function(training_df,
     ...
   ))
 
-  if (! silent){
+  if (!silent) {
     .print_metrics(metrics)
   }
 

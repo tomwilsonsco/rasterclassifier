@@ -64,14 +64,14 @@
 #' or integer.
 #' @param actual_y A vector of actual class values. Should be the same datatype
 #' and of the same length as `pred_y`.
-#'.
+#' .
 #' @return A list of metrics - confusion matrix, precision, recall, F1 Score
 #' and overall accuracy.
 #' @export
 #'
 #' @examples
 #' actual_y <- iris$Species
-#' pred_y <- sample(actual_y, length(actual_y), replace=TRUE)
+#' pred_y <- sample(actual_y, length(actual_y), replace = TRUE)
 #' get_ml_metrics(actual_y, pred_y)
 get_ml_metrics <- function(pred_y, actual_y) {
   .get_metrics(pred_y, actual_y)

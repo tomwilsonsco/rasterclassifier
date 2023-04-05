@@ -1,4 +1,4 @@
-shuffle_df <- function(input_df, seed_value = NULL) {
+.shuffle_df <- function(input_df, seed_value = NULL) {
   if (!is.null(seed_value)) {
     set.seed(seed_value)
   }
@@ -30,7 +30,7 @@ train_test_split <- function(training_df,
   training_df$id <- 1:nrow(training_df)
 
   if (shuffle) {
-    training_df <- shuffle_df(training_df, seed_value)
+    training_df <- .shuffle_df(training_df, seed_value)
   }
 
   if (!is.null(seed_value)) {
