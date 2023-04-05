@@ -9,6 +9,8 @@ classif_train_test(
   n_tests = 5,
   classifier = "random_forest",
   class_column = "ml_class",
+  training_proportion = 0.75,
+  silent = FALSE,
   ...
 )
 }
@@ -24,13 +26,21 @@ and only option is random_forest.}
 \item{class_column}{Name of the column in training_df containing class
 labels.}
 
+\item{training_proportion}{Proportion of \code{training_df} rows used for
+training compared to testing. Defaults to 0.75.}
+
+\item{silent}{Whether to print metrics for each test. Defaults to TRUE.}
+
 \item{...}{Other arguments to be passed to classifier algorithm. For example
 if random_forest can specify ntree for the number of decision trees used.}
 }
 \value{
-List of metrics as determined by get_classif_metrics()
+List of metrics as determined by \code{get_classif_metrics()}
 }
 \description{
-This process will print metrics specified by get_classif_metrics() and
-a mean per metric over all tests.
+This process will print metrics specified by \code{get_lassif_metrics()} and
+print a mean per metric over all tests.
+}
+\examples{
+iris |> classif_train_test(class_column = "Species")
 }

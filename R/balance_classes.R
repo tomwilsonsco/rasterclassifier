@@ -20,6 +20,7 @@
 #'
 #' @return A data.frame with a subset of rows of input df after sampling.
 #' @export
+#' @importFrom rlang .data
 #'
 #' @examples
 #' # Generate example df with unbalanced classes

@@ -14,7 +14,7 @@
 #' )
 #' rast2 <- terra::rast(
 #'   ncols = 10, nrows = 10, xmin = 0, xmax = 10, ymin = 0,
-#'   ymax = 10, crs = "EPSG:3857"
+#'   ymax = 10, crs = "EPSG:4326"
 #' )
 #'
 #' check_epsg(rast1, rast2)

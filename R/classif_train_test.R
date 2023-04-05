@@ -43,7 +43,7 @@
 
 #' Classifier testing n times against different train test splits.
 #'
-#' This process will print metrics specified by [get_lassif_metrics()] and
+#' This process will print metrics specified by `get_lassif_metrics()` and
 #' print a mean per metric over all tests.
 #'
 #' @param training_df Input dataframe to be used for training and testing
@@ -59,7 +59,7 @@
 #' @param ... Other arguments to be passed to classifier algorithm. For example
 #' if random_forest can specify ntree for the number of decision trees used.
 #'
-#' @return List of metrics as determined by [get_classif_metrics()]
+#' @return List of metrics as determined by `get_classif_metrics()`
 #' @export
 #'
 #' @examples

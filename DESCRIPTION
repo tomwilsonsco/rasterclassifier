@@ -1,5 +1,5 @@
 Package: rasterclassifier
-Title: Simple classification of raster data using vector training data.
+Title: Simple classification of raster data using vector training data
 Version: 0.0.0.9000
 Authors@R: 
     person("Thomas", "Wilson", , "thomaswilson81@gmail.com", 
@@ -14,6 +14,12 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     magrittr,
-    raster,
     sf,
-    terra
+    terra,
+    dplyr,
+    purrr,
+    randomForest,
+    stats,
+    cli,
+    rlang
+    

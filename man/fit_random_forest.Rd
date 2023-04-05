@@ -19,7 +19,7 @@ its default of 500.}
 An object of class randomForest (see \code{\link[randomForest:randomForest]{randomForest::randomForest()}})
 }
 \description{
-Designed to receive input of \code{\link[=df |> train_test_split() |>\% xy_select]{df |> train_test_split() |>\% xy_select()}}
+Designed to receive input of \verb{df |> train_test_split() |>\% xy_select()}
 }
 \examples{
 input_list <- iris \%>\%

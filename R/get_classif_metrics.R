@@ -72,7 +72,7 @@
 #' @examples
 #' actual_y <- iris$Species
 #' pred_y <- sample(actual_y, length(actual_y), replace = TRUE)
-#' get_ml_metrics(actual_y, pred_y)
+#' get_classif_metrics(actual_y, pred_y)
 get_classif_metrics <- function(pred_y, actual_y) {
   .get_metrics(pred_y, actual_y)
 }
