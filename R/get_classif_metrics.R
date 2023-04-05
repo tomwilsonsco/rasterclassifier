@@ -28,15 +28,15 @@
   row_sum <- rowSums(confusion_matrix)
   col_sum <- colSums(confusion_matrix)
 
-  precision <- mean(tp / row_sum)
-  recall <- mean(tp / col_sum)
+  precision <- mean(tp / col_sum)
+  recall <- mean(tp / row_sum)
 
   list(
     confusion_matrix = confusion_matrix,
     precision = precision,
     recall = recall,
     f1_score = .calc_f1_score(precision, recall),
-    overall = sum(tp) / sum(row_sum)
+    overall = sum(tp) / sum(confusion_matrix)
   )
 }
 
@@ -47,13 +47,13 @@
 
   confusion_matrix <- table(pred_y, actual_y)
 
-  if (ncol(confusion_matrix == 2)) {
+  if (ncol(confusion_matrix)==2) {
     metrics <- .binary_metrics(confusion_matrix)
-  } else if (ncol(confusion_matrix > 2)) {
+  } else if (ncol(confusion_matrix) > 2) {
     metrics <- .multiclass_metrics(confusion_matrix)
     # If just one class in actual_y
   } else {
-    cli::abort("There is only one class: {levels(actual_y)}")
+    cli::cli_abort("There is only one class: {levels(actual_y)}")
   }
   metrics
 }
@@ -73,6 +73,6 @@
 #' actual_y <- iris$Species
 #' pred_y <- sample(actual_y, length(actual_y), replace = TRUE)
 #' get_ml_metrics(actual_y, pred_y)
-get_ml_metrics <- function(pred_y, actual_y) {
+get_classif_metrics <- function(pred_y, actual_y) {
   .get_metrics(pred_y, actual_y)
 }

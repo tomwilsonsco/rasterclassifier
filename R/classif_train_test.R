@@ -14,7 +14,7 @@
 
   # Add other classifiers here in time....
 
-  get_ml_metrics(pred_y, tt_xy$test$y)
+  get_classif_metrics(pred_y, tt_xy$test$y)
 }
 
 .print_metrics <- function(metrics) {
