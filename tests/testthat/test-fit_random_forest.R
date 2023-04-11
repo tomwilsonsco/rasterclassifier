@@ -1,7 +1,7 @@
 test_that("rf internal works", {
   test_list <- iris |>
     train_test_split(seed_value=123) |>
-    xy_select(class_column="Species")
+    features_labels_select(class_column="Species")
 
   saved_rf<- readRDS(test_path("testdata", "test_rf_trained.rds"))
 

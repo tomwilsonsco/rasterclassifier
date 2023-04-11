@@ -9,5 +9,5 @@ test_that("xy selection works", {
     "test_split_xy.rds"
   ))
 
-  expect_identical(xy_select(test_split, "Species"), test_split_xy)
+  expect_identical(features_labels_select(test_split, "Species"), test_split_xy)
 })

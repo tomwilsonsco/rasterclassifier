@@ -2,7 +2,9 @@
 #' Fit a [randomForest::randomForest()] using input lists
 #' of train, test x, y.
 #'
-#' Designed to receive input of `df |> train_test_split() |>% xy_select()`
+#' Designed to receive input of `df |>
+#' train_test_split()
+#' |>% features_labels_select()`
 #'
 #' @param train_test_xy List of train and test lists, each sub-list containing
 #' an X dataframe and a y vector.
@@ -16,7 +18,7 @@
 #' @examples
 #' input_list <- iris %>%
 #'   train_test_split() %>%
-#'   xy_select(class_column = "Species")
+#'   features_labels_select(class_column = "Species")
 #' fit_random_forest(input_list, ntree = 100)
 fit_random_forest <- function(train_test_xy, ...) {
   randomForest::randomForest(

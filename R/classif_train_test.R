@@ -5,7 +5,7 @@
                            ...) {
   tt_xy <- training_df %>%
     train_test_split(training_proportion = training_proportion) %>%
-    xy_select(class_column)
+    features_labels_select(class_column)
 
   if (classifier == "random_forest") {
     model <- fit_random_forest(tt_xy, ...)
