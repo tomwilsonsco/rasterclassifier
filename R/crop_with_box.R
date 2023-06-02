@@ -21,7 +21,7 @@
 #' )
 #' # crop
 #' crop_with_box(rast,
-# 'xmin = 2,
+#' xmin = 2,
 #' ymin = 2,
 #' xmax = 5,
 #' ymax = 5,
