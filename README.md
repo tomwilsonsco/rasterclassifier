@@ -33,6 +33,11 @@ example_polys <- sf::st_read(system.file("test_polys.gpkg",
   package = "rasterclassifier"
 ))
 
+# read the example mask layer as sf feature
+mask_poly <- sf::st_read(system.file("test_mask.gpkg",
+  package = "rasterclassifier"
+))
+
 # extract pixel values from raster using sf feature collection
 pixel_df <- extract_pixels(example_img, example_polys)
 
@@ -47,13 +52,21 @@ rf <- pixel_df |>
   features_labels_select() |>
   fit_random_forest()
 
+# Mask the prediction image to area of interest
+example_img <- terra::mask(example_img, mask_poly)
+
 # Use the trained model to predict a whole image
 pred_img <- terra::predict(example_img, rf, na.rm = TRUE)
 
-# Plot rgb version of raster and prediction image
-par(mfrow = c(1, 2))
+
+
+pred_features <- sf::st_as_sf(terra::as.polygons(pred_img, dissolve=TRUE)) |>
+  subset(class == 1) |>
+  sf::st_cast("POLYGON")
+
+# Plot rgb version of raster and prediction polys with red outline
 terra::plotRGB(example_img, stretch = "hist")
-terra::image(pred_img, axes = FALSE)
+terra::plot(pred_features, border="red", color=NA, add=TRUE)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
