@@ -65,8 +65,8 @@ pred_features <- sf::st_as_sf(terra::as.polygons(pred_img, dissolve=TRUE)) |>
   sf::st_cast("POLYGON")
 
 # Plot rgb version of raster and prediction polys with red outline
-terra::plotRGB(example_img, stretch = "hist")
-terra::plot(pred_features, border="red", color=NA, add=TRUE)
+terra::plotRGB(example_img, stretch = "hist", r=3, g=2, b=1)
+terra::plot(pred_features, color="black", add=TRUE)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
