@@ -3,3 +3,4 @@
 ^LICENSE\.md$
 
 example_tests.R
+^README\.Rmd$
