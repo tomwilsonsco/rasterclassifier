@@ -12,6 +12,11 @@
     pred_y <- stats::predict(model, tt_xy$test$x)
   }
 
+  if (classifier == "maximum_likelihood") {
+    model <- fit_mlc(tt_xy)
+    pred_y <- predict_mlc(model, tt_xy$test$x)
+  }
+
   # Add other classifiers here in time....
 
   get_classif_metrics(pred_y, tt_xy$test$y)
