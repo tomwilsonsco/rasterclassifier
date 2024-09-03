@@ -15,6 +15,7 @@ Config/testthat/edition: 3
 Imports: 
     magrittr,
     sf,
+    raster,
     terra,
     dplyr,
     purrr,
@@ -22,4 +23,6 @@ Imports:
     stats,
     cli,
     rlang
-    
+Depends: 
+    R (>= 2.10)
+LazyData: true
