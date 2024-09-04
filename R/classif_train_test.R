@@ -13,8 +13,8 @@
   }
 
   if (classifier == "maximum_likelihood") {
-    model <- fit_mlc(tt_xy)
-    pred_y <- predict_mlc(model, tt_xy$test$x)
+    model <- mlc(tt_xy)
+    pred_y <- stats::predict(model, tt_xy$test$x)
   }
 
   # Add other classifiers here in time....

@@ -4,7 +4,7 @@
 #'
 #' Designed to receive input of `df |>
 #' train_test_split()
-#' |>% features_labels_select()`
+#' |> features_labels_select()`
 #'
 #' @param train_test_xy List of train and test lists, each sub-list containing
 #' an X dataframe and a y vector.
