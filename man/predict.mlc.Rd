@@ -30,6 +30,6 @@ SpatRaster, otherwise returns vector of class predictions.
 }
 \examples{
 \dontrun{
- terra::predict(example_img, model=mlc, na.rm = TRUE)
+terra::predict(example_img, model = mlc, na.rm = TRUE)
 }
 }

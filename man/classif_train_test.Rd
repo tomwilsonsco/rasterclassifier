@@ -21,7 +21,8 @@ classifier.}
 \item{n_tests}{How many different train-test splits and tests to run.}
 
 \item{classifier}{Machine learning classifier to use. Currently the default
-and only option is random_forest.}
+option is random_forest and maximum likelihood classifier is the other
+option.}
 
 \item{class_column}{Name of the column in training_df containing class
 labels.}

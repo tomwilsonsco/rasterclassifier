@@ -26,7 +26,9 @@ Cropped \code{terra::rast}
 Crop a raster using bounding box coords
 }
 \examples{
-\dontshow{.old_wd <- setwd(tempdir())}
+\dontshow{
+.old_wd <- setwd(tempdir())
+}
 # create raster
 rast <- terra::rast(
   ncols = 10, nrows = 10, xmin = 0, xmax = 10, ymin = 0,
@@ -35,11 +37,14 @@ rast <- terra::rast(
 )
 # crop
 crop_with_box(rast,
-xmin = 2,
-ymin = 2,
-xmax = 5,
-ymax = 5,
-out_file = "test.tif")
-\dontshow{setwd(.old_wd)}
+  xmin = 2,
+  ymin = 2,
+  xmax = 5,
+  ymax = 5,
+  out_file = "test.tif"
+)
+\dontshow{
+setwd(.old_wd)
+}
 
 }
