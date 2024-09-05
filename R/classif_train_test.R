@@ -10,9 +10,12 @@
   if (classifier == "random_forest") {
     model <- fit_random_forest(tt_xy, ...)
     pred_y <- stats::predict(model, tt_xy$test$x)
+  } else if (classifier == "maximum_likelihood") {
+    model <- mlc(tt_xy)
+    pred_y <- stats::predict(model, tt_xy$test$x)
+  } else {
+    cli::cli_abort("Classifier {classifier} not available.")
   }
-
-  # Add other classifiers here in time....
 
   get_classif_metrics(pred_y, tt_xy$test$y)
 }
@@ -50,7 +53,8 @@
 #' classifier.
 #' @param n_tests How many different train-test splits and tests to run.
 #' @param classifier Machine learning classifier to use. Currently the default
-#' and only option is random_forest.
+#' option is random_forest and maximum likelihood classifier is the other
+#' option.
 #' @param class_column Name of the column in training_df containing class
 #' labels.
 #' @param training_proportion Proportion of `training_df` rows used for

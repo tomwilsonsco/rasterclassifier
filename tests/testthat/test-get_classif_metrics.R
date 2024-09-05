@@ -43,9 +43,8 @@ test_that("multiclass metrics work", {
 })
 
 test_that("one class gives error", {
-  expect_error(get_classif_metrics(c(0,0,0,0,0,0), c(0,0,0,0,0,0)),
-               "There is only one class: 0")
-
+  expect_error(
+    get_classif_metrics(c(0, 0, 0, 0, 0, 0), c(0, 0, 0, 0, 0, 0)),
+    "There is only one class: 0"
+  )
 })
-
-

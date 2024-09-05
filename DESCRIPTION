@@ -1,6 +1,6 @@
 Package: rasterclassifier
 Title: Simple classification of raster data using vector training data
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
     person("Thomas", "Wilson", , "thomaswilson81@gmail.com", 
     role = c("cre"))
@@ -8,14 +8,13 @@ Description: Simple classification of raster data using vector training data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
     magrittr,
     sf,
-    raster,
     terra,
     dplyr,
     purrr,
