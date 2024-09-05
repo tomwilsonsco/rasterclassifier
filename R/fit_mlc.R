@@ -1,8 +1,10 @@
 # The mlc object stores means and a covariance matrix of pixel values
 .mlc_inputs <- function(df, class_val) {
-  return(list(class_val = class_val,
-              mean_vec = colMeans(df),
-              cov_mat = stats::cov(df)))
+  return(list(
+    class_val = class_val,
+    mean_vec = colMeans(df),
+    cov_mat = stats::cov(df)
+  ))
 }
 
 #' Fit a maximum likelihood classifier using input lists

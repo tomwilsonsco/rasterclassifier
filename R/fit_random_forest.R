@@ -1,4 +1,3 @@
-
 #' Fit a [randomForest::randomForest()] using input lists
 #' of train, test x, y.
 #'

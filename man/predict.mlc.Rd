@@ -10,6 +10,8 @@
 \item{object}{a fitted mlc using \code{\link[=mlc]{mlc()}}}
 
 \item{newdata}{a data.frame or SpatRaster of values to predict.}
+
+\item{...}{other arguments (not relevant in this case)}
 }
 \value{
 numeric vector of predicted class values or 1 band SpatRaster

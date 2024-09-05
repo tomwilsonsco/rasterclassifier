@@ -33,8 +33,8 @@
 #'   train_test_split() %>%
 #'   features_labels_select(class_column = "Species")
 features_labels_select <- function(train_test_list,
-                      class_column = "ml_class",
-                      y_as_factor = TRUE) {
+                                   class_column = "ml_class",
+                                   y_as_factor = TRUE) {
   purrr::map(
     train_test_list,
     \(x) .xy_col_selection(x,

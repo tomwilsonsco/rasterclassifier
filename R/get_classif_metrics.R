@@ -47,7 +47,7 @@
 
   confusion_matrix <- table(pred_y, actual_y)
 
-  if (ncol(confusion_matrix)==2) {
+  if (ncol(confusion_matrix) == 2) {
     metrics <- .binary_metrics(confusion_matrix)
   } else if (ncol(confusion_matrix) > 2) {
     metrics <- .multiclass_metrics(confusion_matrix)

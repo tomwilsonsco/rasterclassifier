@@ -1,4 +1,3 @@
-
 .extract_per_class <- function(class_value,
                                input_raster,
                                training_shapes,
