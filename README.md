@@ -74,3 +74,17 @@ terra::plot(pred_features, color = "black", add = TRUE)
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+
+``` r
+
+# if wanted to do the same with maximum likelihood classifier:
+# Train the mlc 
+# (this is just calculating per class band means and covariance matrices)
+mlc <- pixel_df |>
+  train_test_split() |>
+  features_labels_select() |>
+  mlc()
+
+# Use the trained mlc model to predict a whole image
+pred_img <- terra::predict(example_img, model=mlc, na.rm = TRUE)
+```

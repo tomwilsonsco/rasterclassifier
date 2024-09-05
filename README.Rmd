@@ -82,4 +82,16 @@ pred_features <- sf::st_as_sf(terra::as.polygons(pred_img, dissolve = TRUE)) |>
 # Plot rgb version of raster and prediction polys with red outline
 terra::plotRGB(example_img, stretch = "hist", r = 3, g = 2, b = 1)
 terra::plot(pred_features, color = "black", add = TRUE)
+
+# if wanted to do the same with maximum likelihood classifier:
+# Train the mlc 
+# (this is just calculating per class band means and covariance matrices)
+mlc <- pixel_df |>
+  train_test_split() |>
+  features_labels_select() |>
+  mlc()
+
+# Use the trained mlc model to predict a whole image
+pred_img <- terra::predict(example_img, model=mlc, na.rm = TRUE)
+
 ```
