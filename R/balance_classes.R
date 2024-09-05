@@ -1,4 +1,3 @@
-
 # Smallest number of rows in df per class column value
 .count_smallest_class <- function(training_df,
                                   class_column) {
