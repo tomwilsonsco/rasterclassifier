@@ -55,9 +55,14 @@ pixel_df <- extract_pixels(example_img, example_polys)
 # This will run 5 different train test splits,
 # then train `randomForest` (default) on training set
 # and report different accuracy metrics against the testing set
-classif_train_test(pixel_df)
+classif_train_test(pixel_df, classifier = "random_forest")
 
-# If happy with metrics then can proceed to train a randomForest
+# A custom maximum likelihood classifier was created in the package
+# This is generally less accurate than random forest, but can easily
+# compare with the same training data
+classif_train_test(pixel_df, classifier = "maximum_likelihood")
+
+# If happy with RF metrics then can proceed to train a randomForest
 rf <- pixel_df |>
   train_test_split() |>
   features_labels_select() |>
@@ -69,15 +74,12 @@ example_img <- terra::mask(example_img, mask_poly)
 # Use the trained model to predict a whole image
 pred_img <- terra::predict(example_img, rf, na.rm = TRUE)
 
-
-
-pred_features <- sf::st_as_sf(terra::as.polygons(pred_img, dissolve=TRUE)) |>
+# Convert the classified image to polygons
+pred_features <- sf::st_as_sf(terra::as.polygons(pred_img, dissolve = TRUE)) |>
   subset(class == 1) |>
   sf::st_cast("POLYGON")
 
 # Plot rgb version of raster and prediction polys with red outline
-terra::plotRGB(example_img, stretch = "hist", r=3, g=2, b=1)
-terra::plot(pred_features, color="black", add=TRUE)
- 
-
+terra::plotRGB(example_img, stretch = "hist", r = 3, g = 2, b = 1)
+terra::plot(pred_features, color = "black", add = TRUE)
 ```
